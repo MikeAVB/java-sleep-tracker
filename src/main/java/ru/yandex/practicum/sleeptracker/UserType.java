@@ -1,13 +1,13 @@
 package ru.yandex.practicum.sleeptracker;
 
-public enum SleepQuality {
-    GOOD("GOOD"),
-    NORMAL("NORMAL"),
-    BAD("BAD");
+public enum UserType {
+    OWL("Сова"),
+    LARK("Жаворонок"),
+    PIGEON("Голубь");
 
     private final String description;
 
-    SleepQuality(String description) {
+    UserType(String description) {
         this.description = description;
     }
 
