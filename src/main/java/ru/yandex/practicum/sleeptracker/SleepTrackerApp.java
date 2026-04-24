@@ -8,7 +8,7 @@ import java.util.function.Function;
 import ru.yandex.practicum.sleeptracker.functions.*;
 
 public class SleepTrackerApp {
-    private static final List<Function<List<SleepSession>, SleepAnalysisResult<? extends Number>>> functions = new ArrayList<>();
+    private static final List<AnalysisFunction<?>> functions = new ArrayList<>();
 
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -23,6 +23,7 @@ public class SleepTrackerApp {
             functions.add(new SessionMaxFunction());
             functions.add(new SessionAverageFunction());
             functions.add(new SessionBadCountFunction());
+            functions.add(new UserChronotypeFunction());
 
             functions.stream()
                     .map(function -> function.apply(sessions))

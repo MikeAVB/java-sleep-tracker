@@ -27,6 +27,7 @@ public class SleepLogLoader {
     public static List<SleepSession> loadFromString(String log) {
         Objects.requireNonNull(log);
         return Arrays.stream(log.split("\n"))
+                .map(String::strip)
                 .map(SleepSession::fromString)
                 .toList();
 

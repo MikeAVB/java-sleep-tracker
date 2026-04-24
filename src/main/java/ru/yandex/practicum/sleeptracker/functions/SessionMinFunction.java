@@ -6,7 +6,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.function.Function;
 
-public class SessionMinFunction implements Function<List<SleepSession>, SleepAnalysisResult<? extends Number>> {
+public class SessionMinFunction implements AnalysisFunction<Long> {
     private static final String description = "Функция определяет минимальную продолжительность сна в минутах";
     @Override
     public SleepAnalysisResult<Long> apply(List<SleepSession> sleepSessions) {

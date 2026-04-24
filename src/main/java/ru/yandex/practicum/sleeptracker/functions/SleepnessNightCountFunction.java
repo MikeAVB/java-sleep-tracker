@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class SessionCountFunction implements AnalysisFunction<Long> {
+public class SleepnessNightCountFunction implements Function<List<SleepSession>, SleepAnalysisResult<? extends Number>> {
     private static final String description = "Функция для посчета количества сессий сна";
 
     @Override

@@ -1,13 +1,13 @@
 package ru.yandex.practicum.sleeptracker;
 
-public enum UserType {
+public enum UserChronotype {
     OWL("Сова"),
     LARK("Жаворонок"),
     PIGEON("Голубь");
 
     private final String description;
 
-    UserType(String description) {
+    UserChronotype(String description) {
         this.description = description;
     }
 

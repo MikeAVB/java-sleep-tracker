@@ -4,9 +4,8 @@ import ru.yandex.practicum.sleeptracker.SleepSession;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.function.Function;
 
-public class SessionAverageFunction implements Function<List<SleepSession>, SleepAnalysisResult<? extends Number>> {
+public class SessionAverageFunction implements AnalysisFunction<Long> {
     private static final String description = "Функция определяет среднюю продолжительность сна в минутах";
     @Override
     public SleepAnalysisResult<Long> apply(List<SleepSession> sleepSessions) {

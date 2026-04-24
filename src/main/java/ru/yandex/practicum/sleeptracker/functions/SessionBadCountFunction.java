@@ -6,7 +6,7 @@ import ru.yandex.practicum.sleeptracker.SleepSession;
 import java.util.List;
 import java.util.function.Function;
 
-public class SessionBadCountFunction implements Function<List<SleepSession>, SleepAnalysisResult<? extends Number>> {
+public class SessionBadCountFunction implements AnalysisFunction<Long> {
     private static final String description = "Функция определяет количество сессий с плохим качеством сна";
     @Override
     public SleepAnalysisResult<Long> apply(List<SleepSession> sleepSessions) {
