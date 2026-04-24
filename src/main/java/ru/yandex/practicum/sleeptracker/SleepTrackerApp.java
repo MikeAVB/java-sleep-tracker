@@ -1,16 +1,12 @@
 package ru.yandex.practicum.sleeptracker;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 import ru.yandex.practicum.sleeptracker.functions.*;
 
 public class SleepTrackerApp {
+
 
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -19,7 +15,7 @@ public class SleepTrackerApp {
         }
 
         try {
-            List<SleepSession> sessions = loadFromFile(args[0]);
+            List<SleepSession> sessions = SleepLogLoader.loadFromFile(args[0]);
             System.out.println(new SessionCountFunction().apply(sessions));
 
         } catch (SessionFormatException exception) {
@@ -29,14 +25,5 @@ public class SleepTrackerApp {
         }
     }
 
-    private static List<SleepSession> loadFromFile(String filePath) throws IOException, SessionFormatException {
-        Path file = Paths.get(filePath);
-        List<SleepSession> sessions = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(file)) {
-            while (reader.ready()) {
-                sessions.add(SleepSession.fromString(reader.readLine()));
-            }
-        }
-        return sessions;
-    }
+
 }
