@@ -10,9 +10,6 @@ public class SessionCountFunction implements Function<List<SleepSession>, SleepA
     @Override
     public SleepAnalysisResult<Long> apply(List<SleepSession> sleepSessions) {
         Objects.requireNonNull(sleepSessions);
-        return new SleepAnalysisResult<>(
-                "Функция для посчета количества сессий сна",
-                sleepSessions.stream().count()
-        );
+        return new SleepAnalysisResult<>(sleepSessions.stream().count());
     }
 }

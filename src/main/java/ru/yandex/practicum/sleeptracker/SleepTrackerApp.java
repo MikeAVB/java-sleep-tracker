@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.yandex.practicum.sleeptracker.functions.*;
+
 public class SleepTrackerApp {
 
     public static void main(String[] args) {
@@ -18,7 +20,7 @@ public class SleepTrackerApp {
 
         try {
             List<SleepSession> sessions = loadFromFile(args[0]);
-            sessions.forEach(System.out::println);
+            System.out.println(new SessionCountFunction().apply(sessions));
 
         } catch (SessionFormatException exception) {
             System.out.println("Ошибка при парсинге строки " + exception.getSessionString());
