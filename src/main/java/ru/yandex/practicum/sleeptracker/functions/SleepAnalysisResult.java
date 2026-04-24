@@ -1,11 +1,11 @@
 package ru.yandex.practicum.sleeptracker.functions;
 
-public class SleepAnalysisResult <T extends Number> {
+public class SleepAnalysisResult <T> {
     private final String description;
     private final T result;
 
-    public SleepAnalysisResult(T result) {
-        this.description = "Функция для посчета количества сессий сна";
+    public SleepAnalysisResult(String description, T result) {
+        this.description = description;
         this.result = result;
     }
 

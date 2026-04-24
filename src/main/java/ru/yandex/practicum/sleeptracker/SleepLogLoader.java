@@ -5,11 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class SleepLogLoader {
     public static List<SleepSession> loadFromFile(String filePath) throws IOException, SessionFormatException {
@@ -19,11 +17,9 @@ public class SleepLogLoader {
     }
 
     public static List<SleepSession> loadFromFile(Path filePath) throws IOException, SessionFormatException {
-        List<SleepSession> sessions = new ArrayList<>();
+        List<SleepSession> sessions;
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {
-            while (reader.ready()) {
-                sessions.add(SleepSession.fromString(reader.readLine()));
-            }
+            sessions = reader.lines().map(SleepSession::fromString).toList();
         }
         return sessions;
     }
