@@ -18,6 +18,7 @@ public class SleepTrackerApp {
 
         try {
             List<SleepSession> sessions = loadFromFile(args[0]);
+            sessions.forEach(System.out::println);
 
         } catch (SessionFormatException exception) {
             System.out.println("Ошибка при парсинге строки " + exception.getSessionString());
