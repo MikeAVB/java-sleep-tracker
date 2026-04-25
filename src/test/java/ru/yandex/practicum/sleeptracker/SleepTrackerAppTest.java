@@ -47,12 +47,12 @@ public class SleepTrackerAppTest {
      */
 
     @Test
-    void shouldReturnCorrectSessionCountWhenMultiple() {
+    void shouldReturnCorrectCount() {
         assertEquals(13, new SessionCountFunction().apply(sessions).getResult());
     }
 
     @Test
-    void shouldReturnSessionCountWhenEmpty() {
+    void shouldReturnZeroWhenEmpty() {
         assertEquals(0, new SessionCountFunction().apply(emptySessionList).getResult());
     }
 
@@ -123,12 +123,12 @@ public class SleepTrackerAppTest {
      */
 
     @Test
-    void shouldReturnBadCountCorrectValue() {
+    void shouldReturnCorrectValue() {
         assertEquals(2, new SessionBadCountFunction().apply(sessions).getResult());
     }
 
     @Test
-    void shouldReturnZeroBadCountNoValue() {
+    void shouldReturnZeroBadCount() {
         assertEquals(0, new SessionBadCountFunction().apply(emptySessionList).getResult());
     }
 
@@ -147,7 +147,7 @@ public class SleepTrackerAppTest {
      */
 
     @Test
-    void shouldSleeplessThrowsWhenEmptyList() {
+    void shouldSleeplessThrowsWhenEmpty() {
         List<SleepSession> emptyList = new ArrayList<>();
         assertThrows(NoSuchElementException.class, () -> new SleeplessNightCountFunction().apply(emptyList));
     }
@@ -190,7 +190,7 @@ public class SleepTrackerAppTest {
     UserChronotypeFunction
      */
     @Test
-    void shouldChronotypeThrowsWhenEmptyList() {
+    void shouldChronotypeThrowsWhenEmpty() {
         List<SleepSession> emptyList = new ArrayList<>();
         assertThrows(NoSuchElementException.class, () -> new UserChronotypeFunction().apply(emptyList));
     }
