@@ -5,7 +5,7 @@ import ru.yandex.practicum.sleeptracker.SleepSession;
 import java.util.function.Predicate;
 
 //Предикат, определящий является ли сессия сна дневной (внтри дня, в границах (06:00;00:00) не пересекающаяся с ночью)
-public class isDaytimeSleep implements Predicate<SleepSession> {
+public class IsDaytimeSleep implements Predicate<SleepSession> {
 
     @Override
     public boolean test(SleepSession session) {

@@ -2,7 +2,7 @@ package ru.yandex.practicum.sleeptracker.functions;
 
 import ru.yandex.practicum.sleeptracker.SleepSession;
 import ru.yandex.practicum.sleeptracker.functions.util.AnalysisFunction;
-import ru.yandex.practicum.sleeptracker.functions.util.isDaytimeSleep;
+import ru.yandex.practicum.sleeptracker.functions.util.IsDaytimeSleep;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -35,7 +35,7 @@ public class SleeplessNightCountFunction implements AnalysisFunction<Long> {
         Long allNightsCount = (long) period.getDays() + 1;
 
         Long nightSleepCount = sleepSessions.stream()
-                .filter(new isDaytimeSleep().negate())  //убираем все сессии дневного сна, остаются только ночи
+                .filter(new IsDaytimeSleep().negate())  //убираем все сессии дневного сна, остаются только ночи
                 .count();  //получаем количество сессий ночного сна
 
         //в результате вычитаем из общего количества ночей количество сессий ночного сна, в итоге получится

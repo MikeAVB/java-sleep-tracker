@@ -4,7 +4,7 @@ import ru.yandex.practicum.sleeptracker.SleepSession;
 import ru.yandex.practicum.sleeptracker.UserChronotype;
 import ru.yandex.practicum.sleeptracker.functions.util.AnalysisFunction;
 import ru.yandex.practicum.sleeptracker.functions.util.NightBoundaries;
-import ru.yandex.practicum.sleeptracker.functions.util.isDaytimeSleep;
+import ru.yandex.practicum.sleeptracker.functions.util.IsDaytimeSleep;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -46,7 +46,7 @@ public class UserChronotypeFunction implements AnalysisFunction<UserChronotype> 
     public SleepAnalysisResult<UserChronotype> apply(List<SleepSession> sleepSessions) {
         Objects.requireNonNull(sleepSessions);
         Map<UserChronotype, Long> statistics = sleepSessions.stream()
-                .filter(new isDaytimeSleep().negate())  //убираем дневные сессии сна
+                .filter(new IsDaytimeSleep().negate())  //убираем дневные сессии сна
                 .map(this::getChronotypeOfSession)  //сопоставляем сесссии к их типу
                 //и делаем словарь в котором сопоставляем количество сессий каждого типа
                 .collect(Collectors.groupingBy(userChronotype -> userChronotype, Collectors.counting()));
