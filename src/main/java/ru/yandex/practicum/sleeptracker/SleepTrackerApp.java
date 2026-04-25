@@ -3,9 +3,9 @@ package ru.yandex.practicum.sleeptracker;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 import ru.yandex.practicum.sleeptracker.functions.*;
+import ru.yandex.practicum.sleeptracker.functions.util.AnalysisFunction;
 
 public class SleepTrackerApp {
     private static final List<AnalysisFunction<?>> functions = new ArrayList<>();
@@ -23,6 +23,7 @@ public class SleepTrackerApp {
             functions.add(new SessionMaxFunction());
             functions.add(new SessionAverageFunction());
             functions.add(new SessionBadCountFunction());
+            functions.add(new SleeplessNightCountFunction());
             functions.add(new UserChronotypeFunction());
 
             functions.stream()

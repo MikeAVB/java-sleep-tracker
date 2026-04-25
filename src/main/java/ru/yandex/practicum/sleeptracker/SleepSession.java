@@ -19,7 +19,8 @@ public class SleepSession {
             Objects.requireNonNull(sessionString);
 
             String[] parts = sessionString.split(";");
-            if (parts.length != 3) throw new SessionFormatException("Количество параметров отличается от ожидаемых", sessionString);
+            if (parts.length != 3)
+                throw new SessionFormatException("Количество параметров отличается от ожидаемых", sessionString);
 
             LocalDateTime start = LocalDateTime.parse(parts[0], formatter);
             LocalDateTime end = LocalDateTime.parse(parts[1], formatter);

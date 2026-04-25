@@ -128,8 +128,8 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    void shouldThrowsBadCountNoValue() {
-        assertThrows(NoSuchElementException.class, () -> new SessionBadCountFunction().apply(emptySessionList));
+    void shouldReturnZeroBadCountNoValue() {
+        assertEquals(0, new SessionBadCountFunction().apply(emptySessionList).getResult());
     }
 
     @Test
@@ -140,5 +140,100 @@ public class SleepTrackerAppTest {
     @Test
     void shouldReturnBadCountTwoValue() {
         assertEquals(1, new SessionBadCountFunction().apply(twoSessionsList).getResult());
+    }
+
+    /*
+    SleeplessNightCountFunction
+     */
+
+    @Test
+    void shouldSleeplessThrowsWhenEmptyList() {
+        List<SleepSession> emptyList = new ArrayList<>();
+        assertThrows(NoSuchElementException.class, () -> new SleeplessNightCountFunction().apply(emptyList));
+    }
+
+    @Test
+    void shouldSleeplessReturnZeroValue() {
+        List<SleepSession> sessionsWithoutSleepless = List.of(
+                SleepSession.fromString("25.04.26 23:00;26.04.26 07:00;NORMAL"),
+                SleepSession.fromString("26.04.26 23:00;27.04.26 07:00;NORMAL"),
+                SleepSession.fromString("27.04.26 23:00;28.04.26 07:00;NORMAL")
+                );
+        assertEquals(0L, new SleeplessNightCountFunction().apply(sessionsWithoutSleepless).getResult());
+    }
+
+    @Test
+    void shouldSleeplessReturnOneValue() {
+        List<SleepSession> sessionsWithOneSleepless = List.of(
+                SleepSession.fromString("25.04.26 23:00;26.04.26 07:00;NORMAL"),
+                SleepSession.fromString("26.04.26 23:00;27.04.26 07:00;NORMAL"),
+                SleepSession.fromString("28.04.26 23:00;29.04.26 07:00;NORMAL")
+        );
+        assertEquals(1L, new SleeplessNightCountFunction().apply(sessionsWithOneSleepless).getResult());
+    }
+
+    @Test
+    void shouldSleeplessReturnFourValue() {
+        List<SleepSession> sessionsWithFourSleepless = List.of(
+                SleepSession.fromString("25.04.26 23:00;26.04.26 07:00;NORMAL"),
+                SleepSession.fromString("26.04.26 23:00;27.04.26 07:00;NORMAL"),
+                SleepSession.fromString("28.04.26 23:00;29.04.26 07:00;NORMAL"),
+                SleepSession.fromString("29.04.26 23:00;30.04.26 07:00;NORMAL"),
+                SleepSession.fromString("02.05.26 23:00;03.05.26 07:00;NORMAL"),
+                SleepSession.fromString("03.05.26 23:00;04.05.26 07:00;NORMAL"),
+                SleepSession.fromString("05.05.26 23:00;06.05.26 07:00;NORMAL")
+        );
+        assertEquals(4L, new SleeplessNightCountFunction().apply(sessionsWithFourSleepless).getResult());
+    }
+
+    /*
+    UserChronotypeFunction
+     */
+    @Test
+    void shouldChronotypeThrowsWhenEmptyList() {
+        List<SleepSession> emptyList = new ArrayList<>();
+        assertThrows(NoSuchElementException.class, () -> new UserChronotypeFunction().apply(emptyList));
+    }
+
+    @Test
+    void shouldChronotypeReturnOwl() {
+        List<SleepSession> owlList = List.of(
+                SleepSession.fromString("25.04.26 23:05;26.04.26 10:00;NORMAL"),
+                SleepSession.fromString("26.04.26 21:00;27.04.26 05:00;NORMAL"),
+                SleepSession.fromString("29.04.26 01:00;29.04.26 10:00;NORMAL"),
+                SleepSession.fromString("29.04.26 23:05;30.04.26 10:00;NORMAL"),
+                SleepSession.fromString("02.05.26 23:05;03.05.26 09:05;NORMAL"),
+                SleepSession.fromString("03.05.26 20:00;04.05.26 05:00;NORMAL"),
+                SleepSession.fromString("05.05.26 23:05;06.05.26 10:00;NORMAL")
+        );
+        assertEquals(UserChronotype.OWL, new UserChronotypeFunction().apply(owlList).getResult());
+    }
+
+    @Test
+    void shouldChronotypeReturnLark() {
+        List<SleepSession> larkList = List.of(
+                SleepSession.fromString("25.04.26 20:05;26.04.26 05:00;NORMAL"),
+                SleepSession.fromString("26.04.26 21:00;27.04.26 06:00;NORMAL"),
+                SleepSession.fromString("29.04.26 01:00;29.04.26 10:00;NORMAL"),
+                SleepSession.fromString("29.04.26 23:05;30.04.26 10:00;NORMAL"),
+                SleepSession.fromString("02.05.26 21:05;03.05.26 09:05;NORMAL"),
+                SleepSession.fromString("03.05.26 20:00;04.05.26 05:00;NORMAL"),
+                SleepSession.fromString("05.05.26 20:05;06.05.26 06:00;NORMAL")
+        );
+        assertEquals(UserChronotype.LARK, new UserChronotypeFunction().apply(larkList).getResult());
+    }
+
+    @Test
+    void shouldChronotypeReturnPigeon() {
+        List<SleepSession> pigeonList = List.of(
+                SleepSession.fromString("25.04.26 20:05;26.04.26 09:50;NORMAL"),
+                SleepSession.fromString("26.04.26 23:04;27.04.26 06:00;NORMAL"),
+                SleepSession.fromString("29.04.26 01:00;29.04.26 10:00;NORMAL"),
+                SleepSession.fromString("29.04.26 23:05;30.04.26 08:00;NORMAL"),
+                SleepSession.fromString("02.05.26 21:05;03.05.26 09:05;NORMAL"),
+                SleepSession.fromString("03.05.26 20:00;04.05.26 05:00;NORMAL"),
+                SleepSession.fromString("05.05.26 20:05;06.05.26 06:00;NORMAL")
+        );
+        assertEquals(UserChronotype.PIGEON, new UserChronotypeFunction().apply(pigeonList).getResult());
     }
 }
